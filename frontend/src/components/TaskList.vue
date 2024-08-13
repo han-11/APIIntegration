@@ -1,37 +1,39 @@
 <template>
-  <div class="max-w-4xl mx-auto mt-10 bg-white shadow-md rounded-lg">
-    <h1 class="text-4xl font-bold text-center text-blue-600 mt-6 mb-6">
-      Task Tracker
-    </h1>
-
-    <!-- Navigation -->
-    <nav class="mb-6 text-center">
-      <router-link to="/add-task" class="ml-4 text-blue-500 hover:underline">Add New Task</router-link>
-      <router-link to="/participants" class="ml-4 text-blue-500 hover:underline">Manage Participants</router-link>
-    </nav>
-
-    <!-- Task List Header -->
-    <div class="grid grid-cols-5 gap-4 p-4 border-b bg-gray-100 font-semibold">
-      <div class="text-gray-700">Task ID</div>
-      <div class="col-span-2 text-gray-700">Name</div>
-      <div class="text-gray-700">Due Date</div>
-      <div class="text-gray-700 text-center">Completed</div>
-      <div class="text-gray-700 text-center">Delete</div>
+    
+  <div class="overflow-x-auto max-w-4xl mx-auto mt-10 bg-white shadow-md rounded-lg">
+             <!-- Task Table -->
+    <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+      <div class="overflow-hidden">
+        <table class="min-w-full">
+          <thead class="bg-white border-b">
+            <tr>
+              <th scope="col" class="text-sm font-medium text-gray-900 px-2 sm:px-6 py-4 text-left">Task ID</th>
+              <th scope="col" class="text-sm font-medium text-gray-900 px-2 sm:px-6 py-4 text-left">Task Name</th>
+              <th scope="col" class="text-sm font-medium text-gray-900 px-2 sm:px-6 py-4 text-left">Due Date</th>
+              <th scope="col" class="text-sm font-medium text-gray-900 px-2 sm:px-6 py-4 text-left">Completed</th>
+              <th scope="col" class="text-sm font-medium text-gray-900 px-2 sm:px-6 py-4 text-left">Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-if="taskStore.tasks.length === 0" class="bg-gray-100 border-b">
+              <td colspan="5" class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 text-center">
+                No tasks available.
+              </td>
+            </tr>
+            <TaskItem
+              v-for="task in taskStore.tasks"
+              :key="task.id"
+              :task="task"
+              @toggle-task="toggleTaskCompletion"
+              @delete-task="deleteTask"
+            />
+          </tbody>
+        </table>
+      </div>
     </div>
 
-    <!-- Task Items -->
-    <div v-if="taskStore.tasks.length === 0" class="p-4 text-center text-gray-500">
-      No tasks available.
-    </div>
-    <div v-else class="divide-y divide-gray-200">
-      <TaskItem
-        v-for="task in taskStore.tasks"
-        :key="task.id"
-        :task="task"
-        @toggle-task="toggleTaskCompletion"
-      />
-    </div>
   </div>
+  
 </template>
 
 <script setup>

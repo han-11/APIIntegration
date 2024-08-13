@@ -1,29 +1,32 @@
 <template>
-  <div class="flex items-center justify-between p-4 border-b">
-    <div>
-      <router-link :to="'/task/' + task.id" class="text-gray-500 font-semibold mr-2">
+  <tr :class="index % 2 === 0 ? 'bg-white border-b' : 'bg-gray-100 border-b'">
+    <td class="px-2 sm:px-6 py-4 whitespace-nowrap text-xs sm:text-sm font-medium text-gray-900">
+      <router-link :to="'/task/' + task.id" class="text-gray-500 font-semibold">
         #{{ task.id }}
       </router-link>
-      <router-link :to="'/task/' + task.id" :class="{
-          'line-through text-gray-500': task.completed,
-          'text-black': !task.completed}">
+    </td>
+    <td class="px-2 sm:px-6 py-4 whitespace-nowrap text-xs sm:text-sm font-light text-gray-900">
+      <router-link :to="'/task/' + task.id" :class="{ 'line-through text-gray-500': task.completed, 'text-black': !task.completed }">
         {{ task.name }}
       </router-link>
-    </div>
-    <div class="text-sm text-gray-400">
-      Due: {{ task.due_date }}
-    </div>
-        <input
-      type="checkbox"
-      :id="'task-' + task.id"  
-      :checked="task.completed"
-      @change="toggleTaskCompletion" 
-      class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-    />
-    <button @click="deleteTask(task.id)" class="text-red-500 hover:text-red-700">
-      <i class="pi pi-trash" style="color: slateblue"></i>
-    </button>
-  </div>
+    </td>
+    <td class="px-2 sm:px-6 py-4 whitespace-nowrap text-xs sm:text-sm font-light text-gray-900">
+      {{ task.due_date }}
+    </td>
+    <td class="px-2 sm:px-6 py-4 whitespace-nowrap text-xs sm:text-sm font-light text-gray-900">
+      <input
+        type="checkbox"
+        :checked="task.completed"
+         @change="toggleTaskCompletion"
+        class="h-4 w-4 text-sky-600 focus:ring-indigo-500 border-gray-300 rounded"
+      />
+    </td>
+    <td class="px-2 sm:px-6 py-4 whitespace-nowrap text-xs sm:text-sm font-light text-gray-900">
+      <button @click="deleteTask(task.id)" class="text-sky-500 hover:text-red-700">
+        <i class="pi pi-trash"></i>
+      </button>
+    </td>
+  </tr>
 </template>
 
 <script setup>
