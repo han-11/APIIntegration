@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "title": "Submit Registration Form",
+    "dueDate": "2024-10-15",
+    "completed": false
+  },
+  {
+    "id": 2,
+    "title": "Prepare Presentation",
+    "dueDate": "2024-10-20",
+    "completed": false
+  },
+  {
+    "id": 3,
+    "title": "Attend Meeting",
+    "dueDate": "2024-10-25",
+    "completed": true
+  },
+  {
+    "id": 4,
+    "title": "Complete Homework",
+    "dueDate": "2024-10-16",
+    "completed": false
+  },
+  {
+    "id": 5,
+    "title": "Grocery Shopping",
+    "dueDate": "2024-10-17",
+    "completed": true
+  }
+]

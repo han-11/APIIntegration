@@ -1,0 +1,146 @@
+// src/store/taskStore.js
+import { defineStore } from 'pinia';
+import apiClient from '@/api';
+import axios from 'axios';
+
+export const useTaskStore = defineStore('taskStore', {
+  state: () => ({
+    tasks: [],
+    participants: [],
+
+  }),
+
+  actions: {
+    async fetchTasks() {
+      try {
+        const response = await apiClient.get('/tasks/');  // Correct URL
+        this.tasks = response.data;
+        console.log(this.tasks);
+      } catch (error) {
+        console.error('Failed to fetch tasks:', error);
+      }
+    },
+
+    async fetchParticipants() {
+      console.log('fetchParticipants function called');
+      try {
+       const responded= await apiClient.get('/participants/');
+        this.participants = responded.data;
+        console.log('Participants:', this.participants);
+    
+      } catch (error) {
+        console.error('Error fetching participants:', error.message);
+        console.error('Error Details:', error);
+      }
+    },
+    
+    async assignParticipantToTask(taskId, participantId) {
+      try {
+        await apiClient.post(`/tasks/${taskId}/assign/`, { participantId }); // Use apiClient for consistency
+        // Refresh tasks to show updated assignment
+        await this.fetchTasks(); // Assuming fetchTasks is the correct method to refresh the task list
+      } catch (error) {
+        console.error('Error assigning participant:', error.message);
+      }
+    },
+    
+    async addParticipant(participant) {
+      try {
+        const response = await apiClient.post('/participants/', participant);
+        this.participants.push(response.data);
+        return response.data; // Return the added participant for further use
+      } catch (error) {
+        console.error('Error adding participant:', error.message);
+        throw error;
+      }
+    },
+    
+    async addTask(task) {
+      try {
+        // Extracting only the relevant fields to send to the API
+        const taskData = {
+          name: task.name,
+          due_date: task.due_date,
+          completed: task.completed,
+          participant_id: task.participant_id  // Send only the participant ID
+        };
+        
+        // Sending the task data to the API
+        const response = await apiClient.post('/tasks/', taskData);
+        this.tasks.push(response.data);  // Updating the store with the new task
+
+      } catch (error) {
+        console.error('Failed to add task:', error.response ? error.response.data : error.message);
+      }
+    },
+
+    async deleteTask(id) {
+      try {
+        console.log('Received task ID in store:', id);  // Log the ID received in the store
+    
+        if (!id) {
+          throw new Error('Task ID is undefined');
+        }
+    
+        const response = await apiClient.delete(`/tasks/${id}/`);
+        console.log('DELETE request sent to:', `/tasks/${id}/`);  // Log the exact URL being called
+    
+        this.tasks = this.tasks.filter(task => task.id !== id);
+        console.log('Deleted task with id:', id);
+    
+      } catch (error) {
+        console.error('Failed to delete task:', error.response ? error.response.data : error.message);
+      }
+    },
+
+
+    async updateTask(id, updatedTask) {
+      try {
+        const taskData = {
+          name: updatedTask.name,
+          due_date: updatedTask.due_date,
+          completed: updatedTask.completed,
+          participant_id: "1" // Ensure this field is included
+        };
+    
+        const response = await apiClient.put(`/tasks/${id}/`, taskData);
+        const index = this.tasks.findIndex(task => task.id === id);
+        if (index !== -1) {
+          this.tasks[index] = response.data;  // Update the task in the store
+        }
+      } catch (error) {
+        console.error('Failed to update task:', error);
+      }
+    },
+    
+
+    async toggleTaskCompletion(taskId) {
+      const task = this.tasks.find(t => t.id === taskId);
+      if (task) {
+        try {
+          // Toggle the completion status
+          const updatedTask = {
+            ...task,
+            completed: !task.completed,
+            participant_id: "1" // Ensure participant_id is included
+          };
+          const response = await apiClient.put(`/tasks/${taskId}/`, updatedTask);
+
+          // Update the task in the store with the latest data from the server
+          const index = this.tasks.findIndex(t => t.id === taskId);
+          if (index !== -1) {
+            this.tasks[index] = response.data;
+          }
+          console.log('Task completion toggled:', response.data);
+
+        } catch (error) {
+          console.error('Failed to toggle task completion:', error.response ? error.response.data : error.message);
+        }
+      } else {
+        console.error(`Task with ID ${taskId} not found.`);
+      }
+    },
+  
+
+  }
+});
