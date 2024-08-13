@@ -5,6 +5,9 @@ import AddTask from './components/AddTask.vue';
 import TaskDetail from './components/TaskDetail.vue';
 import EditTask from './components/EditTask.vue';
 import ParticipantList from './components/ParticipantList.vue';
+import EditParticipant from './components/EditParticipant.vue';
+
+
 
 const routes = [
   {
@@ -36,6 +39,12 @@ const routes = [
     path: '/participants',
     name: 'ParticipantList',
     component: ParticipantList,
+  },
+
+  {
+    path: '/participants/:id/edit',
+    name: 'EditParticipant',
+    component: EditParticipant,
   },
   
 ];

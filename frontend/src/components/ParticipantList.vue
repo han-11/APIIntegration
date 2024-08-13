@@ -1,25 +1,60 @@
 <template>
-    <div class="max-w-4xl mx-auto p-6 bg-white shadow-md rounded-lg">
-      <h1 class="text-2xl font-bold text-center text-gray-800 mb-6">Participants</h1>
-  
-      <ul class="space-y-4 mb-8">
-        <li
-          v-for="participant in participants"
-          :key="participant.id"
-          class="p-4 bg-gray-100 rounded-lg shadow-sm"
-        >
-          <div class="text-lg font-medium text-gray-700">
-            <div><strong>ID:</strong> {{ participant.id }}</div>
-            <div><strong>Name:</strong> {{ participant.first_name }} {{ participant.last_name }}</div>
-            <div><strong>Email:</strong> {{ participant.email }}</div>
-          </div>
-        </li>
-      </ul>
+
+<div class="overflow-x-auto max-w-4xl ml-10 mr-10 mt-5 bg-white shadow-md rounded-lg">
+  <div class="max-w-lg mx-auto">
+      
+      <h2 class="text-2xl font-bold text-center text-blue-600 mb-4">
+      Manage Participants
+    </h2>
+       <!-- Back Button -->
+    <div class="mb-4 text-left">
+      <router-link to="/" class="text-blue-500 hover:underline">&larr; Back to Task List</router-link>
+      
+       <!-- Back to Task List Button -->
+     <router-link
+        to="/"
+        class="mt-3 ml-5 inline-block bg-gray-600 text-white font-semibold py-2 px-4 rounded-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+      >
+        Back to Task List
+      </router-link>
+   
+    </div>
+    
+ <!-- Participants Table -->
+ <div class="overflow-hidden">
+        <table class="min-w-full bg-white">
+          <thead class="bg-gray-100 border-b">
+            <tr>
+              <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">ID</th>
+              <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">First Name</th>
+              <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Last Name</th>
+              <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Email</th>
+              <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(participant, index) in participants" :key="participant.id" :class="index % 2 === 0 ? 'bg-white border-b' : 'bg-gray-100 border-b'">
+              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ participant.id }}</td>
+              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{ participant.first_name }}</td>
+              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{ participant.last_name }}</td>
+              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{ participant.email }}</td>
+              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                <router-link 
+                  :to="`/participants/${participant.id}/edit`" 
+                  class="text-blue-600 hover:underline">
+                  Edit
+                </router-link>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
   
       <!-- Add New Participant Button -->
       <button
         @click="showForm = !showForm"
-        class="mb-4 bg-green-600 text-white font-semibold py-2 px-4 rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+        class="mb-4 mt-5 bg-green-600 text-white font-semibold py-2 px-4 rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
       >
         {{ showForm ? 'Cancel' : 'Add New Participant' }}
       </button>
@@ -91,14 +126,9 @@
         </button>
       </form>
   
-      <!-- Back to Task List Button -->
-      <router-link
-        to="/"
-        class="mt-8 inline-block bg-gray-600 text-white font-semibold py-2 px-4 rounded-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
-      >
-        Back to Task List
-      </router-link>
+     
     </div>
+  </div>
   </template>
   
   <script setup>

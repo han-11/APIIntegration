@@ -1,6 +1,7 @@
 <template>
     
-  <div class="overflow-x-auto max-w-4xl mx-auto mt-10 bg-white shadow-md rounded-lg">
+    <div class="overflow-x-auto max-w-4xl ml-10 mr-10 mt-5 bg-white shadow-md rounded-lg">
+
              <!-- Task Table -->
     <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
       <div class="overflow-hidden">

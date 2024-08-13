@@ -1,5 +1,5 @@
 <template>
-  <div class="app-container">
+  <div class="bg-slate-900 min-h-screen">
     <NavBar />
     <router-view />
   </div>
@@ -16,16 +16,4 @@ export default {
 };
 </script>
 
-<style scoped>
-.app-container {
-  padding: 20px;
-  max-width: 1000px; /* Updated the width for a more spacious layout */
-  margin: 0 auto;
-}
 
-@media (min-width: 640px) {
-  .app-container {
-    padding: 40px; /* Increase padding on larger screens */
-  }
-}
-</style>

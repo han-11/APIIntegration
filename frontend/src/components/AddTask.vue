@@ -1,5 +1,7 @@
 <template>
-  <div class="max-w-lg mx-auto mt-10 bg-white shadow-md rounded-lg p-6">
+
+<div class="overflow-x-auto max-w-4xl ml-10 mr-10 mt-5 bg-white shadow-md rounded-lg">
+  <div class="max-w-lg mx-auto bg-white rounded-lg p-6">
     <h2 class="text-2xl font-bold text-center text-blue-600 mb-4">
       Add New Task
     </h2>
@@ -32,10 +34,10 @@
           </option>
         </select>
       </div>
-
       <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Add Task</button>
     </form>
   </div>
+</div>
 </template>
 
 <script setup>
