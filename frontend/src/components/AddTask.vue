@@ -5,38 +5,43 @@
     <div class="overflow-x-auto max-w-4xl mt-5 w-full bg-primary-dark shadow-md rounded-lg mx-8">
       
       <div class="py-10 px-10 inline-block min-w-full sm:px-4 lg:px-8 bg-primary-dark ">
+        
+       
         <h2 class="text-2xl font-bold text-center text-primary-iron mb-4">
           Add New Task
         </h2>
 
         <!-- Back Button -->
-        <div class="mb-4 text-left">
+
+        <div class="mb-4 text-left ml-10">
           <router-link to="/" class="text-primary-iron hover:text-blue">
             <i class="pi pi-arrow-left" style="font-size: 1rem"></i>
           </router-link>
         </div>
-        <div class="relative overflow-x-auto shadow-md sm:rounded-lg ">
+        
+        <div class="overflow-x-auto  py-8 px-4 sm:px-6 lg:px-8 bg-bluegray-10 rounded-lg mx-8">
+        
         <form @submit.prevent="addTask">
           <!-- Task Name Input -->
           <div class="mb-4">
-            <label class="block text-gray-700 dark:text-gray-400 font-semibold mb-2" for="taskName">Name:</label>
+            <label class="block text-gray-700  font-semibold mb-2" for="taskName">Name:</label>
             <input v-model="taskName" type="text" id="taskName"
-            
+  
             class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             required />
           </div>
 
           <!-- Due Date Input -->
           <div class="mb-4">
-            <label class="block text-gray-700 dark:text-gray-400 font-semibold mb-2" for="dueDate">Due Date:</label>
+            <label class="block text-gray-700 font-semibold mb-2" for="dueDate">Due Date:</label>
             <input v-model="dueDate" type="date" id="dueDate" 
-            class="mt-1 block w-full p-2 border border-primary rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            class="mt-1 block w-full p-2 rounded-md shadow-sm border border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             required />
           </div>
 
           <!-- Dropdown for Participant Selection -->
           <div class="mb-4">
-            <label class="block text-gray-700 dark:text-gray-400 font-semibold mb-2" for="participant">Assign to Participant:</label>
+            <label class="block text-gray-700 font-semibold mb-2" for="participant">Assign to Participant:</label>
             <select v-model="selectedParticipantId" id="participant" 
             class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
               <option disabled value="">Please select a participant</option>
@@ -45,7 +50,7 @@
               </option>
             </select>
           </div>
-          <button type="submit" class="bg-primary text-white font-semibold py-2 px-4 rounded-md hover:text-primary hover:bg-bluegray-10 ">Add Task</button>
+          <button type="submit" class="w-full bg-primary text-white font-semibold py-2 px-4 rounded-md hover:bg-gray-700 ">Add Task</button>
         </form>
       </div>
     </div>

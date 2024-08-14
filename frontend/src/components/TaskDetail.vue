@@ -1,17 +1,25 @@
 <template>
-  <div class="bg-white overflow-hidden shadow rounded-lg border max-w-lg mx-auto mt-10">
-    <div class="px-4 py-5 sm:px-6 ">
-      <router-link to="/" class="text-sky-600 hover:text-sky-800">
-              <i class="pi pi-arrow-left" style="font-size: 1rem"></i>
-            </router-link>
-      <h2 class="text-lg leading-6 font-medium text-gray-900">
+
+
+<div class="flex justify-center px-4 sm:px-6 lg:px-8">
+    <div class="overflow-x-auto max-w-4xl mt-5 w-full bg-primary-dark shadow-md rounded-lg mx-8">
+      <div class="py-8 px-4 sm:px-6 lg:px-8 bg-primary-dark rounded-lg mx-8">
+
+        <router-link to="/" class="text-primary-iron hover:text-sky-600 ml-10">
+          <i class="pi pi-arrow-left" style="font-size: 1rem"></i>
+        </router-link> 
+
+    <div class="ml-4 px-4 py-3 sm:px-6 ">
+      <h2 class="text-lg leading-6 font-medium text-primary-iron">
         Task Detail
       </h2>
-      <p class="mt-1 max-w-2xl text-sm text-gray-500">
+      <p class="mt-1 max-w-2xl text-sm text-gray-400">
         Detailed information about the selected task.
       </p>
     </div>
-    <div class="border-t border-gray-200 px-4 py-5 sm:p-0">
+
+    <div class="overflow-x-auto  py-8 px-4 sm:px-6 lg:px-8 bg-bluegray-10 rounded-lg mx-8">
+    <div class="px-4 py-5 sm:p-0">
       <dl class="sm:divide-y sm:divide-gray-200" v-if="task">
         <div class="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
           <dt class="text-sm font-medium text-gray-500">Task ID</dt>
@@ -53,11 +61,11 @@
           </dd>
         </div>
         <div class="flex justify-between px-4 py-3 sm:px-6">
-          <button v-if="isEditing.name || isEditing.due_date || isEditing.participant || isEditing.completed" @click="updateTask" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
+          <button v-if="isEditing.name || isEditing.due_date || isEditing.participant || isEditing.completed" @click="updateTask" class="text-gray-500 px-4 py-2 rounded hover:text-green-500">
             <i class="pi pi-check" style="font-size: 1rem"></i>
           </button>
-          <button v-else @click="editTask" class="text-blue-600 hover:text-green-500 ml-10"><i class="pi pi-user-edit" style="font-size: 1rem"></i></button>
-          <button @click="deleteTask" class="text-red-500 hover:text-red-700 ml-2 mr-10"><i class="pi pi-trash"></i></button>
+          <button v-else @click="editTask" class="text-primary hover:text-sky-600 ml-10"><i class="pi pi-user-edit" style="font-size: 1rem"></i></button>
+          <button @click="deleteTask" class="text-primary hover:text-red-600 ml-2 mr-10"><i class="pi pi-trash"></i></button>
         </div>
       </dl>
 
@@ -66,6 +74,10 @@
       </div>
     </div>
   </div>
+</div>
+</div>
+</div>
+
 </template>
 
 <script setup>
