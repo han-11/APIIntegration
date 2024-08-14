@@ -7,7 +7,7 @@
       <div class="py-10 px-10 inline-block min-w-full sm:px-4 lg:px-8 bg-primary-dark ">
         
        
-        <h2 class="text-2xl font-bold text-center text-primary-iron mb-4">
+        <h2 class="text-2xl font-bold text-center text-bluegray-10 mb-4">
           Add New Task
         </h2>
 
@@ -15,7 +15,7 @@
 
         <div class="mb-4 text-left ml-10">
           <router-link to="/" class="text-primary-iron hover:text-blue">
-            <i class="pi pi-arrow-left" style="font-size: 1rem"></i>
+            <i class="pi pi-arrow-left" style="font-size: 1.5rem"></i>
           </router-link>
         </div>
         
@@ -24,10 +24,10 @@
         <form @submit.prevent="addTask">
           <!-- Task Name Input -->
           <div class="mb-4">
-            <label class="block text-gray-700  font-semibold mb-2" for="taskName">Name:</label>
+            <label class="block text-gray-700 font-semibold mb-2" for="taskName">Name:</label>
             <input v-model="taskName" type="text" id="taskName"
-  
-            class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            placeholder="Enter task name"
+            class="mt-1 block w-full p-2  border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             required />
           </div>
 
@@ -44,13 +44,13 @@
             <label class="block text-gray-700 font-semibold mb-2" for="participant">Assign to Participant:</label>
             <select v-model="selectedParticipantId" id="participant" 
             class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
-              <option disabled value="">Please select a participant</option>
+              <option disabled value="" selected>Please select a participant</option>
               <option v-for="participant in uniqueParticipants" :key="participant.id" :value="participant.id">
                 {{ participant.first_name }} {{ participant.last_name }}
               </option>
             </select>
           </div>
-          <button type="submit" class="w-full bg-primary text-white font-semibold py-2 px-4 rounded-md hover:bg-gray-700 ">Add Task</button>
+          <button type="submit" class="w-full bg-primary text-white font-semibold py-2 px-4 rounded-md hover:bg-primary-dark ">Add Task</button>
         </form>
       </div>
     </div>
@@ -110,3 +110,4 @@ const addTask = async () => {
   }
 };
 </script>
+

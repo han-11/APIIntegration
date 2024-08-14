@@ -24,6 +24,7 @@ export default {
           DEFAULT: '#30424A',
           50: '#98A1A5',
           25: '#CBCFD1',
+          15: '#B3B5B5',
           10: '#EBEDED',
           secondary: '#BED2DB',
         },

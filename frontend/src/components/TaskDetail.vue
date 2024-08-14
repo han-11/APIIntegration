@@ -6,7 +6,7 @@
       <div class="py-8 px-4 sm:px-6 lg:px-8 bg-primary-dark rounded-lg mx-8">
 
         <router-link to="/" class="text-primary-iron hover:text-sky-600 ml-10">
-          <i class="pi pi-arrow-left" style="font-size: 1rem"></i>
+          <i class="pi pi-arrow-left" style="font-size: 1.5rem"></i>
         </router-link> 
 
     <div class="ml-4 px-4 py-3 sm:px-6 ">
@@ -55,17 +55,18 @@
         </div>
         <div class="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
           <dt class="text-sm font-medium text-gray-500">Completed</dt>
-          <dd class="mt-1 text-sm sm:mt-0 sm:col-span-2">
-            <input v-if="isEditing.completed" v-model="editedCompleted" type="checkbox" class="text-black border border-gray-300 rounded" />
+          <dd class="mt-1 ml-2 text-sm sm:mt-0 sm:col-span-2">
+            <input v-if="isEditing.completed" v-model="editedCompleted" type="checkbox"
+            class="w-4 h-4 text-primary bg-gray-100 border-gray-300 rounded focus:ring-primary-iron dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-iron focus:ring-2 accent-primary"/>
             <span v-else>{{ task.completed ? 'Yes' : 'No' }}</span>
           </dd>
         </div>
         <div class="flex justify-between px-4 py-3 sm:px-6">
-          <button v-if="isEditing.name || isEditing.due_date || isEditing.participant || isEditing.completed" @click="updateTask" class="text-gray-500 px-4 py-2 rounded hover:text-green-500">
-            <i class="pi pi-check" style="font-size: 1rem"></i>
+          <button v-if="isEditing.name || isEditing.due_date || isEditing.participant || isEditing.completed" @click="updateTask" class="text-primary px-4 py-2 rounded hover:text-green-500">
+            <i class="pi pi-check" style="font-size: 1.2rem"></i>
           </button>
-          <button v-else @click="editTask" class="text-primary hover:text-sky-600 ml-10"><i class="pi pi-user-edit" style="font-size: 1rem"></i></button>
-          <button @click="deleteTask" class="text-primary hover:text-red-600 ml-2 mr-10"><i class="pi pi-trash"></i></button>
+          <button v-else @click="editTask" class="text-primary hover:text-sky-600 ml-10"><i class="pi pi-user-edit" style="font-size: 1.3rem"></i></button>
+          <button @click="deleteTask" class="text-primary hover:text-red-600 ml-2 mr-10"><i class="pi pi-trash" style="font-size: 1.2rem"></i></button>
         </div>
       </dl>
 

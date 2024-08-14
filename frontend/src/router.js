@@ -29,24 +29,12 @@ const routes = [
     props: true, // Pass route params as props
   },
 
-  // {
-  //   path: '/task/:id/edit',
-  //   name: 'EditTask',
-  //   component: EditTask,
-  // },
-
   {
     path: '/participants',
     name: 'ParticipantList',
     component: ParticipantList,
   },
   
-  // {
-  //   path: '/participants/:id/edit',
-  //   name: 'EditParticipant',
-  //   component: EditParticipant,
-  //   props: true, // Pass route params as props
-  // }
 ];
 
 const router = createRouter({

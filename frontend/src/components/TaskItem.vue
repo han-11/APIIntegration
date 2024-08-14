@@ -1,40 +1,43 @@
 <template>
   <tr
-    :class="index % 2 === 0 ? 'bg-bluegray' : 'bg-primary'"
-    class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+    :class="index % 2 === 0 ? 'bg-bluegray-10' : 'bg-white'"
+    class="border-b border-gray-300 hover:bg-bluegray-50"
   >
-    <th scope="row" class="px-4 sm:px-6 py-2 sm:py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-      <router-link :to="'/task/' + task.id" class="text-primary-iron">
+    <th scope="row" class="px-4 sm:px-6 py-2 sm:py-4 font-medium text-gray-700 whitespace-nowrap">
+      <router-link :to="'/task/' + task.id" class="text-primary">
         #{{ task.id }}
       </router-link>
     </th>
     <td class="px-4 sm:px-6 py-2 sm:py-4 whitespace-nowrap">
-      <router-link :to="'/task/' + task.id" :class="{ 'line-through text-primary-dark': task.completed, 'text-primary-iron': !task.completed }">
+      <router-link :to="'/task/' + task.id" :class="{ 'line-through text-primary-dark': task.completed, 'text-primary': !task.completed }">
         {{ task.name }}
       </router-link>
     </td>
-    <td class="px-4 sm:px-6 py-2 sm:py-4 whitespace-nowrap text-primary-iron">
+    <td class="px-4 sm:px-6 py-2 sm:py-4 whitespace-nowrap text-primary">
       {{ task.due_date }}
     </td>
     <td class="px-4 sm:px-6 py-2 sm:py-4 whitespace-nowrap text-center">
+    <label class="inline-flex items-center">
       <input
         type="checkbox"
         :checked="task.completed"
         @change="toggleTaskCompletion"
-        class="h-4 w-4 text-primary focus:ring-indigo-500 border-gray-300 rounded "
+        class="w-4 h-4 text-primary bg-gray-100 border-gray-300 rounded focus:ring-primary-iron dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-iron focus:ring-2 accent-primary"
       />
-    </td>
+    </label>
+  </td>
     <td class="px-4 sm:px-6 py-2 sm:py-4 whitespace-nowrap flex items-center space-x-2">
-      <router-link :to="'/task/' + task.id" class="text-bluegray-haze hover:text-blue">
-        <i class="pi pi-eye"></i>
+      <router-link :to="'/task/' + task.id" class="text-primary hover:text-sky-600 ml-2 mr-2">
+        <i class="pi pi-eye" style="font-size: 1.2rem"></i>
       </router-link>
 
-      <button @click="deleteTask" class="text-bluegray-haze hover:text-red-700">
-        <i class="pi pi-trash"></i>
+      <button @click="deleteTask" class="text-primary hover:text-red-600">
+        <i class="pi pi-trash" style="font-size: 1.2rem"></i>
       </button>
     </td>
   </tr>
 </template>
+
 
 
 <script setup>
@@ -90,3 +93,10 @@ if (confirm(`Are you sure you want to delete the task "${props.task.name}"?`)) {
 
 
 </script>
+
+<style scoped>
+/* Fallback for browsers that may not fully support Tailwind's accent-* class */
+input[type="checkbox"] {
+  accent-color: var(-color-primary); /* Fallback to Tailwind's custom primary color */
+}
+</style>
