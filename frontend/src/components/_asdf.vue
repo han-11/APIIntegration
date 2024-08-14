@@ -1,9 +1,6 @@
 <template>
   <div class="bg-white overflow-hidden shadow rounded-lg border max-w-lg mx-auto mt-10">
-    <div class="px-4 py-5 sm:px-6 ">
-      <router-link to="/" class="text-sky-600 hover:text-sky-800">
-              <i class="pi pi-arrow-left" style="font-size: 1rem"></i>
-            </router-link>
+    <div class="px-4 py-5 sm:px-6">
       <h2 class="text-lg leading-6 font-medium text-gray-900">
         Task Detail
       </h2>
@@ -34,14 +31,7 @@
         <div class="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
           <dt class="text-sm font-medium text-gray-500">Assigned to</dt>
           <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-            <div v-if="isEditing.participant">
-              <select v-model="selectedParticipantId" id="participant" class="w-full p-2 border rounded">
-                <option disabled value="">Please select a participant</option>
-                <option v-for="participant in uniqueParticipants" :key="participant.id" :value="participant.id">
-                  {{ participant.first_name }} {{ participant.last_name }}
-                </option>
-              </select>
-            </div>
+            <input v-if="isEditing.participant" v-model="selectedParticipantId" type="text" class="w-full p-2 border rounded" />
             <span v-else>{{ task.participant.first_name }} {{ task.participant.last_name }}</span>
           </dd>
         </div>
@@ -54,10 +44,12 @@
         </div>
         <div class="flex justify-between px-4 py-3 sm:px-6">
           <button v-if="isEditing.name || isEditing.due_date || isEditing.participant || isEditing.completed" @click="updateTask" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
-            <i class="pi pi-check" style="font-size: 1rem"></i>
+            Save Changes
           </button>
-          <button v-else @click="editTask" class="text-blue-600 hover:text-green-500 ml-10"><i class="pi pi-user-edit" style="font-size: 1rem"></i></button>
-          <button @click="deleteTask" class="text-red-500 hover:text-red-700 ml-2 mr-10"><i class="pi pi-trash"></i></button>
+          <button v-else @click="editTask" class="text-blue-600 hover:text-green-500"><i class="pi pi-user-edit" style="font-size: 1rem"></i></button>
+          <button @click="deleteTask" class="text-red-500 hover:text-red-700 ml-2">
+            <i class="pi pi-trash"></i> Delete Task
+          </button>
         </div>
       </dl>
 
@@ -70,12 +62,13 @@
 
 <script setup>
 import { useTaskStore } from '@/stores/taskStore';
-import { ref, computed, onMounted } from 'vue';
+import { computed, ref, onMounted } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 
 const route = useRoute();
 const router = useRouter();
 const taskStore = useTaskStore();
+
 const task = ref(null);
 const editedName = ref('');
 const editedDueDate = ref('');
@@ -86,12 +79,6 @@ const isEditing = ref({
   due_date: false,
   participant: false,
   completed: false,
-});
-
-
-
-const uniqueParticipants = computed(() => {
-  return taskStore.participants;  // Access participants directly via .value
 });
 
 onMounted(async () => {
@@ -108,12 +95,6 @@ onMounted(async () => {
     console.error(`Task with ID ${route.params.id} not found.`);
     router.push('/');
   }
-
-  // Fetch participants from the store
-  if (!taskStore.participants.length) {
-    await taskStore.fetchParticipants(); // Fetch participants only if not already fetched
-  }
-
 });
 
 const editTask = () => {
@@ -141,19 +122,7 @@ const updateTask = async () => {
   try {
     await taskStore.updateTask(task.value.id, updatedTask);
     console.log('Task updated successfully');
-
-    // Update the task object locally to reflect the changes
-    task.value = { ...task.value, ...updatedTask };
-    task.value.participant = uniqueParticipants.value.find(p => p.id === selectedParticipantId.value) || task.value.participant;
-
-
-    // Reset editing state to close inline editing
-    isEditing.value = {
-      name: false,
-      due_date: false,
-      participant: false,
-      completed: false,
-    };
+    router.push(`/task/${task.value.id}`); // Navigate back to task detail after saving
   } catch (error) {
     console.error('Failed to update task:', error);
   }

@@ -17,7 +17,7 @@ export default {
           5: 'var(--primary-5)',
           dark: 'var(--primary-dark)',
         },
-        'blue-gray': {
+        bluegray: {
           DEFAULT: '#30424A',
           50: '#98A1A5',
           25: '#CBCFD1',
@@ -29,6 +29,20 @@ export default {
           75: '#55B1D7',
           50: '#8DCBE5',
           25: '#C6E5F1',
+        },
+      },
+      textColor: {
+        primary: {
+          DEFAULT: 'var(--primary)',
+          dark: 'var(--primary-dark)',
+        },
+        bluegray: {
+          DEFAULT: '#30424A',
+          light: '#98A1A5',
+        },
+        blue: {
+          DEFAULT: '#1C97CA',
+          light: '#8DCBE5',
         },
       },
     },

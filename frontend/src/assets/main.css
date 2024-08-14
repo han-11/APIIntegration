@@ -6,6 +6,17 @@
 
 
 
-/* @tailwind base;
-@tailwind components;
-@tailwind utilities; */
+
+:root {
+    --primary: #222;
+    --primary-50: #555; 
+    --primary-25: #888; 
+    --primary-10: #aaa; 
+    --primary-5: #ccc;  
+    --primary-dark: #111; 
+}
+
+
+  
+
+  

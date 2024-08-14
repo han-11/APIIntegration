@@ -66,7 +66,7 @@ export const useTaskStore = defineStore('taskStore', {
           name: updatedTask.name,
           due_date: updatedTask.due_date,
           completed: updatedTask.completed,
-          participant_id: "1" // Ensure this field is included
+          participant_id: updatedTask.participant_id // Ensure this field is included
         };
     
         const response = await apiClient.put(`/tasks/${id}/`, taskData);
@@ -111,8 +111,9 @@ export const useTaskStore = defineStore('taskStore', {
     async fetchParticipants() {
       console.log('fetchParticipants function called');
       try {
-       const responded= await apiClient.get('/participants/');
-        this.participants = responded.data;
+        const response = await apiClient.get('/participants/');
+        console.log('Full Response:', response);
+        this.participants = response.data;
         console.log('Participants:', this.participants);
     
       } catch (error) {
@@ -120,6 +121,7 @@ export const useTaskStore = defineStore('taskStore', {
         console.error('Error Details:', error);
       }
     },
+    
     
     async assignParticipantToTask(taskId, participantId) {
       try {

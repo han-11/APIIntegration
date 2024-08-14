@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-primary-dark min-h-screen">
+  <div class="bg-primary min-h-screen ">
     <NavBar />
     <router-view />
   </div>
@@ -17,3 +17,4 @@ export default {
 </script>
 
 
+ß

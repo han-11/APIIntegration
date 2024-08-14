@@ -8,10 +8,17 @@
         </h2>
         
         <!-- Back Button -->
-        <div class="mb-4 text-left">
-          <router-link to="/" class="text-sky-600 hover:text-sky-800"><i class="pi pi-arrow-left" style="font-size: 1rem"></i></router-link>
-        </div>
-        
+        <div class="mb-4 flex justify-between items-center">
+            <router-link to="/" class="text-sky-600 hover:text-sky-800">
+              <i class="pi pi-arrow-left" style="font-size: 1rem"></i>
+            </router-link>
+            <button
+              @click="showForm = !showForm"
+              class="text-sky-500 hover:text-green-700 mr-4 md:mr-8 lg:mr-20"
+            >
+              <i :class="showForm ? 'pi pi-times' : 'pi pi-user-plus'" style="font-size: 1.5rem"></i>
+            </button>
+          </div>
         <!-- Participants Table -->
         <div class="overflow-x-auto">
           <table class="min-w-full bg-white">
@@ -24,9 +31,9 @@
                 <th scope="col" class="text-xs sm:text-sm font-medium text-gray-900 px-2 sm:px-6 py-2 sm:py-4 text-left">Actions</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody class="text-center">
               <tr v-for="(participant, index) in participants" :key="participant.id" :class="index % 2 === 0 ? 'bg-white border-b' : 'bg-gray-100 border-b'">
-                <td class="px-2 sm:px-3 py-2 sm:py-3 whitespace-nowrap text-xs sm:text-sm font-medium text-gray-900">{{ participant.id }}</td>
+                <td class="px-2 sm:px-3 py-2 sm:py-3 whitespace-nowrap text-xs sm:text-sm font-medium text-gray-900 ">{{ participant.id }}</td>
                 
                 <!-- First Name Column -->
                 <td class="text-xs sm:text-sm text-gray-900 font-light px-2 sm:px-6 py-2 sm:py-4 whitespace-nowrap">
@@ -58,13 +65,7 @@
           </table>
         </div>
 
-        <!-- Add New Participant Button -->
-        <button
-          @click="showForm = !showForm"
-          class="mb-4 mt-5 w-full bg-green-600 text-white font-semibold py-2 px-4 rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
-        >
-          {{ showForm ? 'Cancel' : 'Add New Participant' }}
-        </button>
+   
 
         <!-- Form to Add New Participant and Task, shown only if showForm is true -->
         <form v-if="showForm" @submit.prevent="addParticipant" class="space-y-4">

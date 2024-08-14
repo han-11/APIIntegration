@@ -44,8 +44,7 @@
 <script setup>
 import { useTaskStore } from '@/stores/taskStore';
 import { useRouter } from 'vue-router';
-import { ref } from 'vue';
-import { onMounted, computed } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 
 const taskStore = useTaskStore();
 const router = useRouter();
@@ -53,23 +52,19 @@ const taskName = ref('');
 const dueDate = ref('');
 const selectedParticipantId = ref('');  // Define selectedParticipantId
 
-onMounted(() => {
-  taskStore.fetchTasks();  // Fetch tasks including participant data on component mount
+onMounted(async () => {
+  // Fetch tasks including participant data on component mount
+  await taskStore.fetchTasks();
+
+  // Fetch participants from the store
+  if (!taskStore.participants.length) {
+    await taskStore.fetchParticipants(); // Fetch participants only if not already fetched
+  }
 });
 
-// Compute unique participants based on the tasks
+// Use the participants directly from the store to ensure all participants are included
 const uniqueParticipants = computed(() => {
-  const participantsMap = new Map();
-
-  // Iterate over tasks and add each participant to the map
-  taskStore.tasks.forEach(task => {
-    if (task.participant && !participantsMap.has(task.participant.id)) {
-      participantsMap.set(task.participant.id, task.participant);
-    }
-  });
-
-  // Convert map to array to use in dropdown
-  return Array.from(participantsMap.values());
+  return taskStore.participants;  // This will give you all participants, not just those with tasks
 });
 
 const addTask = async () => {
