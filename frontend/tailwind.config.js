@@ -15,7 +15,10 @@ export default {
           25: 'var(--primary-25)',
           10: 'var(--primary-10)',
           5: 'var(--primary-5)',
-          dark: 'var(--primary-dark)',
+          dark: '#171718',
+        },
+        darkblue: {
+          DEFAULT: '#212532',
         },
         bluegray: {
           DEFAULT: '#30424A',
@@ -35,10 +38,14 @@ export default {
         primary: {
           DEFAULT: 'var(--primary)',
           dark: 'var(--primary-dark)',
+          darkgray: '#212532',
+          iron: '#CBCFD1',
         },
         bluegray: {
           DEFAULT: '#30424A',
           light: '#98A1A5',
+          haze: '#EBEDED',
+          secondary: '#BED2DB',
         },
         blue: {
           DEFAULT: '#1C97CA',

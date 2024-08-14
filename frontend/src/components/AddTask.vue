@@ -1,44 +1,62 @@
 <template>
-<div class="flex justify-center">
-<div class="overflow-x-auto  w-2/3 max-w-4xl mx-5 my-5 bg-white shadow-md rounded-lg">
-  <div class="max-w-lg mx-auto bg-white rounded-lg p-6">
-    <h2 class="text-2xl font-bold text-center text-sky-800 dark:text-sky-600 mb-4">
-      Add New Task
-    </h2>
 
-    <!-- Back Button -->
-    <div class="mb-4 text-left">
-          <router-link to="/" class="text-sky-600 hover:text-sky-800"><i class="pi pi-arrow-left" style="font-size: 1rem"></i></router-link>
+
+<div class="flex justify-center px-4 sm:px-6 lg:px-8">
+    <div class="overflow-x-auto max-w-4xl mt-5 w-full bg-primary-dark shadow-md rounded-lg mx-8">
+      
+      <div class="py-10 px-10 inline-block min-w-full sm:px-4 lg:px-8 bg-primary-dark ">
+        <h2 class="text-2xl font-bold text-center text-primary-iron mb-4">
+          Add New Task
+        </h2>
+
+        <!-- Back Button -->
+        <div class="mb-4 text-left">
+          <router-link to="/" class="text-primary-iron hover:text-blue">
+            <i class="pi pi-arrow-left" style="font-size: 1rem"></i>
+          </router-link>
         </div>
+        <div class="relative overflow-x-auto shadow-md sm:rounded-lg ">
+        <form @submit.prevent="addTask">
+          <!-- Task Name Input -->
+          <div class="mb-4">
+            <label class="block text-gray-700 dark:text-gray-400 font-semibold mb-2" for="taskName">Name:</label>
+            <input v-model="taskName" type="text" id="taskName"
+            
+            class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            required />
+          </div>
 
-    <form @submit.prevent="addTask">
-      <!-- Task Name Input -->
-      <div class="mb-4">
-        <label class="block text-gray-700 font-semibold mb-2" for="taskName">Name:</label>
-        <input v-model="taskName" type="text" id="taskName" class="w-full p-2 border rounded" required />
-      </div>
+          <!-- Due Date Input -->
+          <div class="mb-4">
+            <label class="block text-gray-700 dark:text-gray-400 font-semibold mb-2" for="dueDate">Due Date:</label>
+            <input v-model="dueDate" type="date" id="dueDate" 
+            class="mt-1 block w-full p-2 border border-primary rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            required />
+          </div>
 
-      <!-- Due Date Input -->
-      <div class="mb-4">
-        <label class="block text-gray-700 font-semibold mb-2" for="dueDate">Due Date:</label>
-        <input v-model="dueDate" type="date" id="dueDate" class="w-full p-2 border rounded" required />
+          <!-- Dropdown for Participant Selection -->
+          <div class="mb-4">
+            <label class="block text-gray-700 dark:text-gray-400 font-semibold mb-2" for="participant">Assign to Participant:</label>
+            <select v-model="selectedParticipantId" id="participant" 
+            class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
+              <option disabled value="">Please select a participant</option>
+              <option v-for="participant in uniqueParticipants" :key="participant.id" :value="participant.id">
+                {{ participant.first_name }} {{ participant.last_name }}
+              </option>
+            </select>
+          </div>
+          <button type="submit" class="bg-primary text-white font-semibold py-2 px-4 rounded-md hover:text-primary hover:bg-bluegray-10 ">Add Task</button>
+        </form>
       </div>
-
-      <!-- Dropdown for Participant Selection -->
-      <div class="mb-4">
-        <label class="block text-gray-700 font-semibold mb-2" for="participant">Assign to Participant:</label>
-        <select v-model="selectedParticipantId" id="participant" class="w-full p-2 border rounded" required>
-          <option disabled value="">Please select a participant</option>
-          <option v-for="participant in uniqueParticipants" :key="participant.id" :value="participant.id">
-            {{ participant.first_name }} {{ participant.last_name }}
-          </option>
-        </select>
-      </div>
-      <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Add Task</button>
-    </form>
+    </div>
   </div>
 </div>
-</div>
+
+
+
+
+
+
 </template>
 
 <script setup>
