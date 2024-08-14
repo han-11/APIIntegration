@@ -72,6 +72,9 @@
     last_name: '',
     email: '',
   });
+
+ 
+
   
   onMounted(async () => {
     const participantId = route.params.id;

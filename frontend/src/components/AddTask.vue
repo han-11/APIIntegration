@@ -1,15 +1,15 @@
 <template>
-
-<div class="overflow-x-auto max-w-4xl ml-10 mr-10 mt-5 bg-white shadow-md rounded-lg">
+<div class="flex justify-center">
+<div class="overflow-x-auto  w-2/3 max-w-4xl mx-5 my-5 bg-white shadow-md rounded-lg">
   <div class="max-w-lg mx-auto bg-white rounded-lg p-6">
-    <h2 class="text-2xl font-bold text-center text-blue-600 mb-4">
+    <h2 class="text-2xl font-bold text-center text-sky-800 dark:text-sky-600 mb-4">
       Add New Task
     </h2>
 
     <!-- Back Button -->
     <div class="mb-4 text-left">
-      <router-link to="/" class="text-blue-500 hover:underline">&larr; Back to Task List</router-link>
-    </div>
+          <router-link to="/" class="text-sky-600 hover:text-sky-800"><i class="pi pi-arrow-left" style="font-size: 1rem"></i></router-link>
+        </div>
 
     <form @submit.prevent="addTask">
       <!-- Task Name Input -->
@@ -37,6 +37,7 @@
       <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Add Task</button>
     </form>
   </div>
+</div>
 </div>
 </template>
 

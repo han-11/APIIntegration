@@ -1,39 +1,45 @@
 <template>
-    
-    <div class="overflow-x-auto max-w-4xl ml-10 mr-10 mt-5 bg-white shadow-md rounded-lg">
-
+    <div class="flex justify-center">
+    <div class="overflow-x-auto max-w-4xl mx-5 my-5 -full sm:w-2/3 shadow-md rounded-lg">
+      
+      
              <!-- Task Table -->
-    <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+      <div class="py-10 bg-white inline-block min-w-full sm:px-6 lg:px-8">
+        <h1 class="text-2xl font-bold text-center text-sky-600 dark:text-sky-500 mb-4">
+      Task list
+    </h1>
       <div class="overflow-hidden">
-        <table class="min-w-full">
-          <thead class="bg-white border-b">
+        <table class="min-w-full table-auto">
+          <thead class="">
             <tr>
-              <th scope="col" class="text-sm font-medium text-gray-900 px-2 sm:px-6 py-4 text-left">Task ID</th>
-              <th scope="col" class="text-sm font-medium text-gray-900 px-2 sm:px-6 py-4 text-left">Task Name</th>
-              <th scope="col" class="text-sm font-medium text-gray-900 px-2 sm:px-6 py-4 text-left">Due Date</th>
-              <th scope="col" class="text-sm font-medium text-gray-900 px-2 sm:px-6 py-4 text-left">Completed</th>
-              <th scope="col" class="text-sm font-medium text-gray-900 px-2 sm:px-6 py-4 text-left">Delete</th>
+              <th scope="col" class="text-xs sm:text-sm font-medium text-gray-900 px-2 sm:px-6 py-4 text-left">Task ID</th>
+              <th scope="col" class="text-xs sm:text-sm font-medium text-gray-900 px-2 sm:px-6 py-4 text-left">Task Name</th>
+              <th scope="col" class="text-xs sm:text-sm font-medium text-gray-900 px-2 sm:px-6 py-4 text-left">Due Date</th>
+              <th scope="col" class="text-xs sm:text-sm font-medium text-gray-900 px-2 sm:px-6 py-4 text-left">Completed</th>
+              <th scope="col" class="text-xs sm:text-sm font-medium text-gray-900 px-2 sm:px-6 py-4 text-left">Delete</th>
             </tr>
           </thead>
           <tbody>
-            <tr v-if="taskStore.tasks.length === 0" class="bg-gray-100 border-b">
-              <td colspan="5" class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 text-center">
+            <tr v-if="taskStore.tasks.length === 0" class="bg-500 dark:bg-slate-800">
+              <td colspan="5" class="px-6 py-4 whitespace-nowrap text-xs sm:text-sm font-medium text-gray-900 text-center">
                 No tasks available.
               </td>
             </tr>
             <TaskItem
-              v-for="task in taskStore.tasks"
+              v-for="(task,index) in taskStore.tasks"
               :key="task.id"
               :task="task"
+              :index="index"
               @toggle-task="toggleTaskCompletion"
               @delete-task="deleteTask"
             />
           </tbody>
         </table>
       </div>
+      </div>
     </div>
-
   </div>
+  
   
 </template>
 

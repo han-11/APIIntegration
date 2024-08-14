@@ -40,13 +40,13 @@ const routes = [
     name: 'ParticipantList',
     component: ParticipantList,
   },
-
+  
   {
     path: '/participants/:id/edit',
     name: 'EditParticipant',
     component: EditParticipant,
-  },
-  
+    props: true, // Pass route params as props
+  }
 ];
 
 const router = createRouter({

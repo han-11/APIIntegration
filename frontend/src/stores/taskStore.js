@@ -20,40 +20,6 @@ export const useTaskStore = defineStore('taskStore', {
         console.error('Failed to fetch tasks:', error);
       }
     },
-
-    async fetchParticipants() {
-      console.log('fetchParticipants function called');
-      try {
-       const responded= await apiClient.get('/participants/');
-        this.participants = responded.data;
-        console.log('Participants:', this.participants);
-    
-      } catch (error) {
-        console.error('Error fetching participants:', error.message);
-        console.error('Error Details:', error);
-      }
-    },
-    
-    async assignParticipantToTask(taskId, participantId) {
-      try {
-        await apiClient.post(`/tasks/${taskId}/assign/`, { participantId }); // Use apiClient for consistency
-        // Refresh tasks to show updated assignment
-        await this.fetchTasks(); // Assuming fetchTasks is the correct method to refresh the task list
-      } catch (error) {
-        console.error('Error assigning participant:', error.message);
-      }
-    },
-    
-    async addParticipant(participant) {
-      try {
-        const response = await apiClient.post('/participants/', participant);
-        this.participants.push(response.data);
-        return response.data; // Return the added participant for further use
-      } catch (error) {
-        console.error('Error adding participant:', error.message);
-        throw error;
-      }
-    },
     
     async addTask(task) {
       try {
@@ -141,6 +107,63 @@ export const useTaskStore = defineStore('taskStore', {
       }
     },
   
+
+    async fetchParticipants() {
+      console.log('fetchParticipants function called');
+      try {
+       const responded= await apiClient.get('/participants/');
+        this.participants = responded.data;
+        console.log('Participants:', this.participants);
+    
+      } catch (error) {
+        console.error('Error fetching participants:', error.message);
+        console.error('Error Details:', error);
+      }
+    },
+    
+    async assignParticipantToTask(taskId, participantId) {
+      try {
+        await apiClient.post(`/tasks/${taskId}/assign/`, { participantId }); // Use apiClient for consistency
+        // Refresh tasks to show updated assignment
+        await this.fetchTasks(); // Assuming fetchTasks is the correct method to refresh the task list
+      } catch (error) {
+        console.error('Error assigning participant:', error.message);
+      }
+    },
+    
+    async addParticipant(participant) {
+      try {
+        const response = await apiClient.post('/participants/', participant);
+        this.participants.push(response.data);
+        return response.data; // Return the added participant for further use
+      } catch (error) {
+        console.error('Error adding participant:', error.message);
+        throw error;
+      }
+    },
+
+    async updateParticipant(updatedParticipant) {
+      try {
+        const response = await apiClient.put(`/participants/${updatedParticipant.id}/`, updatedParticipant);
+        const index = this.participants.findIndex(p => p.id === updatedParticipant.id);
+        if (index !== -1) {
+          this.participants[index] = response.data; // Update the participant in the store
+          console.log('Participant updated:', response.data);
+        }
+      } catch (error) {
+        console.error('Failed to update participant:', error.message);
+        throw error;
+      }
+    },
+
+    async deleteParticipant(id) {
+      try {
+        await apiClient.delete(`/participants/${id}/`);
+        this.participants = this.participants.filter(participant => participant.id !== id);
+      } catch (error) {
+        console.error('Failed to delete participant:', error.message);
+      }
+    },
 
   }
 });
