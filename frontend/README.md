@@ -16,7 +16,7 @@ Ensure you have the following installed on your local machine:
 1. **Clone the Repository**
 
    ```bash
-   git clone https://your-repository-url.git
+   git clone https://github.com/han-11/APIIntegration.git
    cd frontend
    ```
 

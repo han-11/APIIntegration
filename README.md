@@ -1,3 +1,5 @@
+
+
 # Task Tracker - Full Stack Application
 
 ## Overview
@@ -86,12 +88,13 @@ my-project/
 
 ## Setup Instructions
 
+
 ### Backend Setup
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/han-11/apiintegration.git
-   cd your-repo/backend
+   git clone https://github.com/han-11/APIIntegration.git
+   cd backend
    ```
 
 2. **Create a virtual environment**:
@@ -101,6 +104,9 @@ my-project/
    ```
 
 3. **Install dependencies**:
+
+   To install the backend dependencies, use the `requirements.txt` file provided in the `backend` directory:
+
    ```bash
    pip install -r requirements.txt
    ```
@@ -132,12 +138,15 @@ my-project/
    npm run serve
    ```
 
-### Running the Application
-- **Run the app**: cd to the main folder, 
+### Running the FullStack Application
 
-```
+To run both the frontend and backend together, navigate to the main project folder and run:
+
+```bash
 npm run dev
 ```
+
+This command is set up to start both the Django development server and the Vue.js development server concurrently, enabling full-stack development.
 
 - **Backend**: The Django REST API will be available at `http://127.0.0.1:8000/`.
 - **Frontend**: The Vue.js application will be available at `http://localhost:8080/`.
@@ -166,6 +175,6 @@ npm run dev
 
 ### Future Enhancements
 
-- **User Authentication**: Adding user authentication to allow different users to manage their own tasks and participants.
 - **Pagination**: Implementing pagination for large lists of tasks and participants.
 - **Testing**: Adding unit and integration tests for both the frontend and backend.
+
