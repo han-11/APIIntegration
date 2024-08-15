@@ -95,6 +95,7 @@
             />
           </div>
 
+          <!-- Last Name Input -->
           <div class="mt-2 mb-1">
             <label for="last_name" class="block text-sm font-medium text-gray-700">Last Name</label>
             <input
@@ -107,6 +108,7 @@
             />
           </div>
 
+          <!-- Email Input -->
           <div class="mt-2 mb-1">
             <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
             <input
@@ -119,6 +121,7 @@
             />
           </div class="mt-2 mb-1">
 
+          <!-- Task Name Input -->
           <div class="mt-2 mb-1">
             <label for="task_name" class="block text-sm font-medium text-gray-700">Task Name</label>
             <input
@@ -130,6 +133,7 @@
             />
           </div>
 
+          <!-- Due Date Input -->
           <div class="mt-2 mb-1">
             <label for="due_date" class="block text-sm font-medium text-gray-700">Due Date</label>
             <input
@@ -164,6 +168,7 @@ const participants = computed(() => taskStore.participants);
 
 const showForm = ref(false); // Controls visibility of the form
 
+// Define an object to hold the new participant and task data
 const newParticipant = ref({
   first_name: '',
   last_name: '',
@@ -175,6 +180,7 @@ const newTask = ref({
   due_date: '',
 });
 
+// Fetch participants when the component is mounted
 onMounted(async () => {
   await taskStore.fetchParticipants();
 });

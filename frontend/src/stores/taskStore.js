@@ -3,6 +3,7 @@ import { defineStore } from 'pinia';
 import apiClient from '@/api';
 import axios from 'axios';
 
+// Create a new store instance.
 export const useTaskStore = defineStore('taskStore', {
   state: () => ({
     tasks: [],
@@ -11,6 +12,8 @@ export const useTaskStore = defineStore('taskStore', {
   }),
 
   actions: {
+
+    // Fetch all tasks from the API
     async fetchTasks() {
       try {
         const response = await apiClient.get('/tasks/');  // Correct URL
@@ -20,7 +23,8 @@ export const useTaskStore = defineStore('taskStore', {
         console.error('Failed to fetch tasks:', error);
       }
     },
-    
+
+    // Add a new task to the API
     async addTask(task) {
       try {
         // Extracting only the relevant fields to send to the API
@@ -40,6 +44,7 @@ export const useTaskStore = defineStore('taskStore', {
       }
     },
 
+    // Delete task from the API
     async deleteTask(id) {
       try {
         console.log('Received task ID in store:', id);  // Log the ID received in the store
@@ -59,7 +64,7 @@ export const useTaskStore = defineStore('taskStore', {
       }
     },
 
-
+// Update task details in the API
     async updateTask(id, updatedTask) {
       try {
         const taskData = {
@@ -79,7 +84,7 @@ export const useTaskStore = defineStore('taskStore', {
       }
     },
     
-
+    // Toggle task completion status
     async toggleTaskCompletion(taskId) {
       const task = this.tasks.find(t => t.id === taskId);
       if (task) {
@@ -107,7 +112,7 @@ export const useTaskStore = defineStore('taskStore', {
       }
     },
   
-
+    // Fetch all participants from the API
     async fetchParticipants() {
       console.log('fetchParticipants function called');
       try {
@@ -122,7 +127,7 @@ export const useTaskStore = defineStore('taskStore', {
       }
     },
     
-    
+    // Assign new participant to a task
     async assignParticipantToTask(taskId, participantId) {
       try {
         await apiClient.post(`/tasks/${taskId}/assign/`, { participantId }); // Use apiClient for consistency
@@ -133,6 +138,7 @@ export const useTaskStore = defineStore('taskStore', {
       }
     },
     
+    // Add new participant function
     async addParticipant(participant) {
       try {
         const response = await apiClient.post('/participants/', participant);
@@ -144,6 +150,7 @@ export const useTaskStore = defineStore('taskStore', {
       }
     },
 
+    // Update participant details 
     async updateParticipant(updatedParticipant) {
       try {
         const response = await apiClient.put(`/participants/${updatedParticipant.id}/`, updatedParticipant);
@@ -158,6 +165,7 @@ export const useTaskStore = defineStore('taskStore', {
       }
     },
 
+    // Delete participant 
     async deleteParticipant(id) {
       try {
         await apiClient.delete(`/participants/${id}/`);

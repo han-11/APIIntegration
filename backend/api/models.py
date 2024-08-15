@@ -1,6 +1,7 @@
 from django.db import models
 
-# Create your models here.
+# Data models for the API
+# Participant model with first_name, last_name, and email fields
 class Participant(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
@@ -9,6 +10,7 @@ class Participant(models.Model):
     def __str__(self):
         return f'{self.first_name} {self.last_name}'
 
+# Task model with name, due_date, completed, and participant fields
 class Task(models.Model):
     name = models.CharField(max_length=255)
     due_date = models.DateField()

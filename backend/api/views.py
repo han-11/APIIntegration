@@ -5,7 +5,7 @@ import logging
 from django.db import connection
 
 
-# Create your views here.
+# Create views for the Participant and Task models
 class ParticipantsList(generics.ListCreateAPIView):
     serializer_class = ParticipantSerializer
     queryset = Participant.objects.all()

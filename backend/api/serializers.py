@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from .models import Participant, Task
 
+# Define serializers for the Participant and Task models
 class ParticipantSerializer(serializers.ModelSerializer):
     tasks = serializers.PrimaryKeyRelatedField(many=True, read_only=True)  # To include tasks in the participant
 
