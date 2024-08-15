@@ -6,6 +6,13 @@
 
 This project is a full-stack application that includes a Vue.js frontend and a Django REST Framework (DRF) backend. The application is designed to manage tasks and participants, allowing users to view, create, edit, and delete tasks and participants. The frontend uses Vue.js along with Tailwind CSS for styling and PrimeIcons for UI icons, while the backend provides a RESTful API to handle data persistence.
 
+
+## Screenshot
+
+Here’s a screenshot of the main page:
+
+![Screenshot of the Webpage](frontend/dist/assets/Screenshot.png)
+
 ## Features
 
 ### Frontend (Vue.js)
